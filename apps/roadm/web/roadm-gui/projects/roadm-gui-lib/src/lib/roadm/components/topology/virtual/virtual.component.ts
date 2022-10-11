@@ -100,7 +100,14 @@ export class VirtualComponent implements OnInit {
                                })
                                );
          this.simulationLink=this.svg.selectAll('line').data(this.links).enter().append('line').attr('stroke','black').attr('opacity',0.8).attr('stroke-width',0.5);
-         this.simulationNode=this.svg.selectAll('circle').data(this.nodes).enter().append('circle').attr('r',d => d.r).attr('fill',d => d.color).call(d3.drag().on('start',function(d){
+         this.simulationNode=this.svg.selectAll('image').data(this.nodes).enter().append('image').attr('xlink:href',function(d){
+                                                                                                                                    if(d.r==5){
+                                                                                                                                        return "https://pic2.zhimg.com/v2-c59a77ed37528d5fbb0b64c637d496a1_b.jpg";
+                                                                                                                                    }
+                                                                                                                                    else{
+                                                                                                                                        return "https://pic3.zhimg.com/v2-396db2109a439af09cd8d86f1e55c88e_b.jpg";
+                                                                                                                                    }
+                                                                                                                                    }).attr('width',40).attr('height',40).attr('viewBox','-20 -20 40 40').call(d3.drag().on('start',function(d){
                                                                                                                                                                              if(!d3.event.active){
                                                                                                                                                                                 hahaha.alphaTarget(.2).restart();
                                                                                                                                                                              }
@@ -120,13 +127,13 @@ export class VirtualComponent implements OnInit {
                                                                                                                                                                             d.fy=null;
                                                                                                                                                                        })
                                                                                                                       );
-         this.simulationText=this.svg.selectAll('text').data(this.nodes).enter().append('text').attr("text-anchor", "middle").text(d => d.name).attr("dy", "25px");
+         this.simulationText=this.svg.selectAll('text').data(this.nodes).enter().append('text').attr("text-anchor", "middle").text(d => d.name).attr("dy", "40px");
          let LINKS=this.simulationLink;
          let NODES=this.simulationNode;
          let TEXTS=this.simulationText;
          this.simulation.on('tick',function(){
                  LINKS.attr('x1',d => d.source.x).attr('y1',d => d.source.y).attr('x2',d => d.target.x).attr('y2',d => d.target.y);
-                 NODES.attr('cx', d => d.x).attr('cy', d => d.y);
+                 NODES.attr('x', d => d.x-20).attr('y', d => d.y-20);
                   TEXTS.attr('x',d => d.x).attr('y',d => d.y);
          });
 //        this.svg.selectAll("rect").data(this.dataset).enter().append("rect").attr("fill","red").attr('x',(d,i)=>this.padding.left+i*this.rectStep).attr('y',(d,i)=>this.height-this.padding.bottom-d).attr("width",this.rectWidth).attr("height",d=>d);
