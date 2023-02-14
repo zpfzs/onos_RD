@@ -6,7 +6,7 @@ import java.io.IOException;
 
 
 
-public class interfaceRestful
+public class interfaceRestful{
 
 public String getVmInfo() throws IOException {
 

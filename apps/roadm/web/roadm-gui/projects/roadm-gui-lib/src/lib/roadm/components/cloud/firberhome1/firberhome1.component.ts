@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../../../../roadm/services/storage.service';
 declare var echarts:any;
 @Component({
   selector: 'roadm-app-firberhome1',
@@ -30,8 +31,57 @@ export class Firberhome1Component implements OnInit {
     image:""
   }
   public vmlist:any[]=[];
-  constructor() { }
+  public delete_name_list:any[]=[];
+  public delete_vm:any;
+  constructor(public storage:StorageService) {
+  }
+  vmpush(){
+      this.vmlist.push(JSON.parse(JSON.stringify(this.vm)));
+      this.storage.set('vmlist',this.vmlist);//装入服务
+      this.delete_name_list.push(JSON.parse(JSON.stringify(this.vm.name)));
+      this.storage.set('namelist',this.delete_name_list);
 
+  }
+  del() {
+    let del_v=this.delete_vm
+    console.log("shancuyuansu",this.delete_vm);
+    let index=-1
+    for(let i=0;i<this.vmlist.length;i++){
+        console.log(this.vmlist[i])
+        if(this.vmlist[i].name==del_v){
+            index=i
+        }
+    }
+    console.log("index",index);
+    if(index>-1){
+        this.vmlist.splice(index,1);
+        console.log(this.vmlist);
+        this.delete_name_list.splice(index,1);
+        this.storage.set('vmlist',this.vmlist);
+        this.storage.set('namelist',this.delete_name_list);
+    }
+    window.location.reload();
+
+  }
+  clear(){
+  this.vmlist=[]
+  this.delete_name_list=[]
+  this.storage.set('vmlist',this.vmlist);
+  this.storage.set('namelist',this.delete_name_list);
+
+  }
+  submit() {
+    this.vm.name=this.creat_form.name;
+    this.vm.cpu=this.creat_form.cpu;
+    this.vm.memory=this.creat_form.memory
+    this.vm.disk=this.creat_form.disk
+    this.vm.ip="待确定"
+    this.vm.image=this.creat_form.image
+    this.vm.status="待确定"
+    this.storage.set('vm',this.vm);
+    this.vmpush();
+    console.log("列表长度",this.vmlist.length)
+  }
   ngOnInit() {
     let myChart1=echarts.init(document.getElementById('bar1'));
                   this.option1 = {
@@ -146,6 +196,23 @@ export class Firberhome1Component implements OnInit {
                           ]
                       };
                       myChart3.setOption(this.option3);
+
+
+
+
+    let list1=this.storage.get('vmlist')//导出服务
+        if(list1){
+          this.vmlist=list1;
+        }
+        let obj1=this.storage.get('vm')//导出服务
+        if(obj1){
+          this.vm=obj1;
+        }
+        let name1=this.storage.get('namelist')
+        if(name1){
+          this.delete_name_list=name1;
+        }
+
   }
 
 }

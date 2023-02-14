@@ -98,7 +98,7 @@
                 </span>
               </div>
               <div class="content3_down">
-                <button id="establish_but">建立</button>
+                <button id="establish_but" (click)="submit();">建立</button>
                 <div class="clear"></div>
               </div>
             </div>
@@ -108,13 +108,14 @@
             <div class="content3_down" id="delete_span">
               <span>
                 选择虚拟机：
-                <select name="DeleteVm" id="DeleteVm" class="switch" [(ngModel)]="creat_form.name">
-                  <option [value]="item" *ngFor="let item of vmlist">{{item.name}}</option>
+                <select name="DeleteVm" id="DeleteVm" class="switch" [(ngModel)]="delete_vm">
+                  <option [value]="item" *ngFor="let item of delete_name_list">{{item}}</option>
+
                 </select>
               </span>
             </div>
             <div class="content3_down">
-              <button id="delete_but">删除</button>
+              <button id="delete_but" (click)="del();">删除</button>
               <div class="clear"></div>
             </div>
           </div>

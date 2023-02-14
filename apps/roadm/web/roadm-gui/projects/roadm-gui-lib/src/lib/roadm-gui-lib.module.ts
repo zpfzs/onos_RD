@@ -32,6 +32,9 @@ import { VirtualComponent } from './roadm/components/topology/virtual/virtual.co
 import { XinjiangComponent } from './roadm/components/topology/xinjiang/xinjiang.component';
 import { XinjiangdataService } from './roadm/services/xinjiangdata.service';
 import { Firberhome1Component } from './roadm/components/cloud/firberhome1/firberhome1.component';
+import { Firberhome2Component } from './roadm/components/cloud/firberhome2/firberhome2.component';
+import { SimuComponent } from './roadm/components/topology/simu/simu.component';
+import { DciComponent } from './roadm/components/network/dci/dci.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +47,9 @@ import { Firberhome1Component } from './roadm/components/cloud/firberhome1/firbe
         VirtualComponent,
         XinjiangComponent,
         Firberhome1Component,
+        Firberhome2Component,
+        SimuComponent,
+        DciComponent,
     ],
     imports: [
         RoadmRoutingModule,

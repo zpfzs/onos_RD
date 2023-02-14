@@ -28,6 +28,8 @@ import org.onosproject.ui.UiConnection;
 import org.onosproject.ui.UiMessageHandler;
 import org.onosproject.ui.table.TableModel;
 import org.onosproject.ui.table.TableRequestHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 
@@ -65,6 +67,7 @@ public class RoadmDeviceViewMessageHandler extends UiMessageHandler {
     private static final String THE_FIRST_WORD = "thefirstword";
     private static final String THE_SECOND_WORD = "thesecondworld";
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private static final String[] COLUMN_IDS = {
             ID, NAME, TYPE, MASTER, PORTS, VENDOR, HW_VERSION, SW_VERSION, PROTOCOL
@@ -139,11 +142,11 @@ public class RoadmDeviceViewMessageHandler extends UiMessageHandler {
         @Override
         public void process(ObjectNode payload) {
             theFirst = string(payload, THE_FIRST_WORD);
-//            log.info("The first word : {}", theFirst);
+            log.info("The first word : {}",theFirst);
             theSecond = string(payload, THE_SECOND_WORD);
-//            log.info("The second word : {}", theSecond);
+            log.info("The second word : {}",theSecond);
 
-            String theResponse = "hi sgp";
+            String theResponse = "hi yike";
 
             ObjectNode test = objectNode();
             test.put(THERECEIVE, theResponse);
